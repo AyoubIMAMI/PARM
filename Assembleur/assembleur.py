@@ -15,9 +15,9 @@ registryDic = {
 def getInstructionList(instructionString):
     return instructionString.replace(',', '').split()
 
-##########
+############################################################
 # SUB
-##########
+############################################################
 def subsToBinary(instructionString):
     """
         For a given instruction (string) will return the same instruction with subs remplaced with its binary value.
@@ -26,11 +26,27 @@ def subsToBinary(instructionString):
     instructionList = getInstructionList(instructionString)
     registryKeyList = registryDic.keys()
 
-    if len(instructionList) != 4:
+    if len(instructionList) < 3:
         return instructionString
     
-    if instructionList[0] != "sub":
+    if not "sub" in instructionList[0]:
         return instructionString
+
+    # 9.1.4.2 SUB (SP minus immediate) : Subtract Immediate from SP (p. 402)
+    # Checking for:  SP, #<offset>
+    if instructionList[1] == "sp" and  instructionList[2].startswith('#'):
+        imm7 = format(int(int(instructionList[2].replace('#', '')) / int(4)), 'b')
+        
+        if len(imm7) > 7:
+            raise MemoryError("imm7 is too big (> 7 bits)")
+        else:
+            imm7Size = len(imm7)
+            for i in range(0, 7 - imm7Size):
+                imm7 = '0' + imm7
+        return "101100001 " + imm7 
+
+    if len(instructionList) != 4:
+        return instructionString 
 
     # sub (register)
     if instructionList[1] in registryKeyList and instructionList[2] in registryKeyList  and instructionList[3] in registryKeyList:
@@ -40,6 +56,7 @@ def subsToBinary(instructionString):
         return "0001101 " + rm + " " + rn + " " + rd
     
     # 9.1.4.2 SUB (SP minus immediate) : Subtract Immediate from SP (p. 402)
+    # Checking for SP, SP, #<offset>
     if instructionList[1] == "sp" and instructionList[2] == "sp" and  instructionList[3].startswith('#'):
         imm7 = format(int(int(instructionList[3].replace('#', '')) / int(4)), 'b')
         
@@ -49,14 +66,14 @@ def subsToBinary(instructionString):
             imm7Size = len(imm7)
             for i in range(0, 7 - imm7Size):
                 imm7 = '0' + imm7
-        print(imm7)
         return "101100001 " + imm7
+    
+    return instructionString
 
 
-
-##########
+############################################################
 # ADD
-##########
+############################################################
 def addsToBinary(instructionString):
     """
         For a given instruction (string) will return the same instruction with adds remplaced with its binary value.
@@ -67,7 +84,7 @@ def addsToBinary(instructionString):
     if len(instructionList) != 4:
         return instructionString
     
-    if instructionList[0] != "add":
+    if not "add" in instructionList[0]:
         return instructionString
 
     # add (register)
@@ -92,7 +109,39 @@ def addsToBinary(instructionString):
 
         return "0001110 " + imm3 + " " + rn + " " + rd
 
-    return ""
+    return instructionString
+
+############################################################
+# MOV
+############################################################
+def movToBinary(instructionString):
+    """
+        For a given instruction (string) will return the same instruction with mov remplaced with its binary value.
+    """
+    instructionList = getInstructionList(instructionString)
+    registryKeyList = registryDic.keys()
+
+    if len(instructionList) != 3:
+        return instructionString
+    
+    if not "mov" in instructionList[0]:
+        return instructionString
+    
+    if instructionList[1] in registryKeyList and instructionList[2].startswith('#'):
+        rd = instructionList[1]
+        imm8 = format(int(instructionList[2].replace('#', '')), 'b')
+        imm8Size = len(imm8)
+        
+        if imm8Size > 8:
+            raise MemoryError("imm8 is too big (> 8 bits)")
+        else:
+            for i in range(0, 8 - imm8Size):
+                imm8 = '0' + imm8
+
+        return "00100 " + rd + " " + imm8
+    
+    return instructionString
+
 
 
 def registryToBinary(instructionString):
@@ -123,15 +172,17 @@ def instructionToHexadecimal(binaryInstruction):
 
 ####### Testing #######
 instructions = [
-    "add r1, r1, r2",
-    "add r1, r1, #5",
-    "sub r1, r1, r2",
-    "sub sp, sp, #12"]
+    "sub sp, #12",
+    "movs r0, #0",
+    "movs r1, #1",
+    "adds r1, r1, r2"]
 
 
 for instruction in instructions: 
     instruction = addsToBinary(instruction)
     instruction = subsToBinary(instruction)
+    instruction = movToBinary(instruction)
+
     instruction = registryToBinary(instruction)
     instruction = instructionToHexadecimal(instruction)
     print(instruction)
