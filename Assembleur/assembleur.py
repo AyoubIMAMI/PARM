@@ -187,13 +187,20 @@ def strToBinary(instructionString):
     registryKeyList = registryDic.keys()
 
     # 9.1.3.1 STR (immediate) : Store Register (p. 386)
-    if len(instructionList) != 4:
+    if len(instructionList) < 3:
         return instructionString
     
     if instructionList[0] != "str":
         return instructionString
     
-   
+    # str reg, [sp] 
+    if instructionList[1] in registryKeyList and instructionList[2] == "[sp]":
+        rt = instructionList[1]
+        return "10010 " + rt + " 00000000"
+
+    # str reg, [sp, #offset] 
+    if len(instructionList) != 4:
+        return instructionString
 
     if instructionList[1] in registryKeyList and instructionList[2] == "[sp" and instructionList[3].startswith("#") and instructionList[3].endswith("]"):
         
@@ -229,7 +236,6 @@ def ldrToBinary(instructionString):
     if instructionList[0] != "ldr":
         return instructionString
     
-   
 
     if instructionList[1] in registryKeyList and instructionList[2] == "[sp" and instructionList[3].startswith("#") and instructionList[3].endswith("]"):
         
@@ -264,7 +270,7 @@ def registryToBinary(instructionString):
     return newInstruction
 
 def instructionToHexadecimal(binaryInstruction):
-    return format(int(binaryInstruction.replace(' ', ''), 2), 'x').upper()
+    return format(int(binaryInstruction.replace(' ', ''), 2), 'x')
 
 
 
@@ -277,11 +283,13 @@ def instructionToHexadecimal(binaryInstruction):
 instructions = [
     "sub sp, #12",
     "movs r0, #0",
+    "str r0, [sp, #8]",
     "movs r1, #1",
     "str r1, [sp, #4]",
     "ldr r1, [sp, #8]",
     "ldr r2, [sp, #4]",
     "adds r1, r1, r2",
+    "str r1, [sp]",
     "add sp, #12"]
 
 
