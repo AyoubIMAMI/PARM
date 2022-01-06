@@ -1,3 +1,36 @@
+import os
+
+#########################
+# File reading
+#########################
+def getFileInstruction(path):
+    instructions = []
+    file = open(path, "r")
+
+    for line in file:
+        line = line.replace('\n', '')
+        if line != "":
+            instructions.append(line)
+    
+    file.close()
+    return instructions
+
+#########################
+# File writing
+#########################
+def writeBin(path, bin):
+    if(os.path.isfile('path')):
+        file = open(path, "x")
+    else:
+        file = open(path, "w")
+    
+    file.write("v2.0 raw\n")
+    file.close()
+    file = open(path, "a")
+    file.write(bin)
+    file.close()
+
+
 #########################
 # Registry Dictionary
 #########################
@@ -274,26 +307,13 @@ def instructionToHexadecimal(binaryInstruction):
 
 
 
+####### Processing #######
+path = input("Enter the Assembler Source file (.s): ")
+binPath = path.replace(".s", ".bin")
+assembler = getFileInstruction(path)
+bin = ""
 
-
-
-
-
-####### Testing #######
-instructions = [
-    "sub sp, #12",
-    "movs r0, #0",
-    "str r0, [sp, #8]",
-    "movs r1, #1",
-    "str r1, [sp, #4]",
-    "ldr r1, [sp, #8]",
-    "ldr r2, [sp, #4]",
-    "adds r1, r1, r2",
-    "str r1, [sp]",
-    "add sp, #12"]
-
-
-for instruction in instructions: 
+for instruction in assembler: 
     instruction = addsToBinary(instruction)
     instruction = subsToBinary(instruction)
     instruction = movToBinary(instruction)
@@ -302,5 +322,7 @@ for instruction in instructions:
 
     instruction = registryToBinary(instruction)
     instruction = instructionToHexadecimal(instruction)
-    print(instruction)
+    bin += instruction + " "
 
+print(bin)
+writeBin(binPath, bin)
