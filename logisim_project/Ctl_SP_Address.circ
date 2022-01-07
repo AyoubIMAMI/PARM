@@ -248,6 +248,9 @@ end TCL_Generic;
     <comp lib="0" loc="(230,250)" name="Pin">
       <a name="label" val="Enable"/>
     </comp>
+    <comp lib="0" loc="(250,250)" name="Tunnel">
+      <a name="label" val="Enable"/>
+    </comp>
     <comp lib="0" loc="(250,690)" name="Constant">
       <a name="facing" val="north"/>
       <a name="value" val="0x0"/>
@@ -271,9 +274,9 @@ end TCL_Generic;
       <a name="label" val="Instruction"/>
       <a name="width" val="16"/>
     </comp>
-    <comp lib="0" loc="(320,250)" name="Bit Extender">
-      <a name="in_width" val="1"/>
-      <a name="out_width" val="32"/>
+    <comp lib="0" loc="(310,370)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="Enable"/>
     </comp>
     <comp lib="0" loc="(330,520)" name="Constant">
       <a name="facing" val="north"/>
@@ -288,8 +291,12 @@ end TCL_Generic;
       <a name="in_width" val="7"/>
       <a name="out_width" val="32"/>
     </comp>
-    <comp lib="0" loc="(350,250)" name="Tunnel">
-      <a name="label" val="Enable"/>
+    <comp lib="0" loc="(370,370)" name="Bit Extender">
+      <a name="in_width" val="1"/>
+      <a name="out_width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(390,370)" name="Tunnel">
+      <a name="label" val="Enable32"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="0" loc="(430,470)" name="Bit Extender">
@@ -325,6 +332,10 @@ end TCL_Generic;
       <a name="label" val="Write_Enable"/>
       <a name="output" val="true"/>
     </comp>
+    <comp lib="0" loc="(560,260)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="Enable"/>
+    </comp>
     <comp lib="0" loc="(590,130)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="New_Stack_pointer"/>
@@ -338,12 +349,12 @@ end TCL_Generic;
     </comp>
     <comp lib="0" loc="(730,700)" name="Tunnel">
       <a name="facing" val="east"/>
-      <a name="label" val="Enable"/>
+      <a name="label" val="Enable32"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="0" loc="(790,900)" name="Tunnel">
       <a name="facing" val="east"/>
-      <a name="label" val="Enable"/>
+      <a name="label" val="Enable32"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="0" loc="(950,840)" name="Tunnel">
@@ -399,17 +410,18 @@ end TCL_Generic;
     <wire from="(210,820)" to="(230,820)"/>
     <wire from="(230,120)" to="(270,120)"/>
     <wire from="(230,200)" to="(270,200)"/>
-    <wire from="(230,250)" to="(280,250)"/>
+    <wire from="(230,250)" to="(250,250)"/>
     <wire from="(250,670)" to="(250,690)"/>
     <wire from="(250,830)" to="(250,850)"/>
     <wire from="(260,660)" to="(300,660)"/>
     <wire from="(260,820)" to="(300,820)"/>
     <wire from="(270,470)" to="(310,470)"/>
-    <wire from="(320,250)" to="(350,250)"/>
+    <wire from="(310,370)" to="(330,370)"/>
     <wire from="(330,480)" to="(330,520)"/>
     <wire from="(340,470)" to="(390,470)"/>
     <wire from="(340,660)" to="(470,660)"/>
     <wire from="(340,820)" to="(470,820)"/>
+    <wire from="(370,370)" to="(390,370)"/>
     <wire from="(430,470)" to="(500,470)"/>
     <wire from="(430,610)" to="(450,610)"/>
     <wire from="(430,770)" to="(450,770)"/>
