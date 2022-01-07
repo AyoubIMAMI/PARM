@@ -20,7 +20,7 @@ public class InputReader {
             while (myReader.hasNextLine()) {
                 String instruction = myReader.nextLine()
                         .replaceAll("[,()\\[\\]]", " ");
-                if (!instruction.startsWith("@"))
+                if (!instruction.startsWith("@") && !instruction.equals(""))
                     instructions.add(instruction);
             }
             myReader.close();

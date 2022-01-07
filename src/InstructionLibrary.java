@@ -25,6 +25,7 @@ public class InstructionLibrary {
         final InstructionPattern orrRegister = new InstructionPattern("orr",  Arrays.asList("rdn", "rm"), "0100001100"); patterns.add(orrRegister);
         final InstructionPattern bicRegister = new InstructionPattern("bic",  Arrays.asList("rdn", "rm"), "0100001110"); patterns.add(bicRegister);
         final InstructionPattern mvnRegister = new InstructionPattern("mvn",  Arrays.asList("rd", "rm"), "0100001111"); patterns.add(mvnRegister);
+        final InstructionPattern mulRegister = new InstructionPattern("mul",  Arrays.asList("rdm", "rn"), "0100001101"); patterns.add(mulRegister);
 
         // Immediate
         final InstructionPattern lslImmediate = new InstructionPattern("lsl",  Arrays.asList("rd", "rm", "#imm5"), "00000"); patterns.add(lslImmediate);

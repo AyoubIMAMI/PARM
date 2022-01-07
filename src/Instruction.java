@@ -3,6 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Instruction {
+    private String providedString;
     private final String instructionName; // Eg. in ADDS <Rd>, <Rn>, <Rm> : "ADDS" is an instruction.
     private ArrayList<String> variables = new ArrayList<>(); // Eg. in ADDS <Rd>, <Rn>, <Rm> : "Rd, Rn, Rm" are variables.
 
@@ -12,6 +13,7 @@ public class Instruction {
     private boolean variablesAreInRightOrder;
 
     Instruction(String instructionString){
+        this.providedString = instructionString;
         String[] instructionElements = instructionString.split(" ");
         instructionName = instructionElements[0];
         variables.addAll(Arrays.asList(instructionElements).subList(1, instructionElements.length));
@@ -118,6 +120,9 @@ public class Instruction {
 
     @Override
     public String toString() {
+        if (providedString.startsWith("b") || providedString.startsWith(".")){
+            return providedString;
+        }
         convertExistingRegisterToBinary();
         convertExistingOffsetToBinary();
         convertExistingImmToBinary();

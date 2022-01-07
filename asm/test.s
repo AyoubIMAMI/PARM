@@ -1,12 +1,19 @@
-movs r0, #170
-movs r1, #255
-add sp, #16
-str r0, [sp, #4]
-str r1, [sp, #0]
-sub sp, #4
-ldr r2,[sp, #4]
-@r0 and r1 values should be 170, AA, 
-@r2 value shoul be 255, FF
-@In ROM, 04 value should be 255, FF, 
-@In ROM, 05 value should be 170, AA, 
-@Needs shift_add_sub_move and sp_address to be implemented
+movs r0, #0
+movs r1, #1
+.goto:
+movs r2, #20
+cmp r0, r1
+bMI .then1
+b .endif1
+.then1:
+rsbs r2, r2, #0
+.endif1:
+cmp r2, r1
+bLT .then2
+b .endif2
+.then2:
+movs r0, #50
+b .goto
+.endif2:
+adds r3, r0, r2
+@r3 value should be 70, 46
