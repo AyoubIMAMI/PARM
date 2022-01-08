@@ -10,6 +10,7 @@ public class BranchManager {
 
     String convertExistingBranchToBinary(ArrayList<String> binaryInstructions){
         StringBuilder output = new StringBuilder();
+        BranchLibrary branchLibrary = new BranchLibrary();
         int nSource = 1;
         for (String instruction : binaryInstructions) {
             StringBuilder newInstruction = new StringBuilder();
@@ -21,6 +22,14 @@ public class BranchManager {
                 newInstruction.append("11100").append(valeurSigneeEnComplementA2(label.getNCible() - nSource - 3, 11));
             }
 
+            // Conditional Branch
+            else if (instruction.startsWith("b") && instruction.split(" ").length == 2) {
+                ConditionalBranch branch = new ConditionalBranch(instruction);
+                branchLibrary.assignCode(branch);
+                newInstruction.append(branch);
+            }
+
+            // Not a Branch
             else {
                 newInstruction.append(instruction);
             }

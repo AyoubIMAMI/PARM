@@ -1,6 +1,6 @@
 public class Branch {
-    private String labelName;
-    private int nCible;
+    private final String labelName;
+    private final int nCible;
 
     Branch(String labelName, int nSource) {
         this.labelName = labelName;
