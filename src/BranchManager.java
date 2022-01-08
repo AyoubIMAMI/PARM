@@ -24,7 +24,7 @@ public class BranchManager {
 
             // Conditional Branch
             else if (instruction.startsWith("b") && instruction.split(" ").length == 2) {
-                ConditionalBranch branch = new ConditionalBranch(instruction);
+                ConditionalBranch branch = new ConditionalBranch(instruction, nSource, this);
                 branchLibrary.assignCode(branch);
                 newInstruction.append(branch);
             }
@@ -46,7 +46,7 @@ public class BranchManager {
         return output.toString();
     }
 
-    private Branch findLabelWithName(String labelName) {
+    Branch findLabelWithName(String labelName) {
         for (Branch branch : branches){
             if (branch.getLabelName().equals(labelName))
                 return branch;
@@ -54,12 +54,10 @@ public class BranchManager {
         return null;
     }
 
-    private String valeurSigneeEnComplementA2(int n, int size) {
+    String valeurSigneeEnComplementA2(int n, int size) {
         if (n > 0){
             String binary = Integer.toBinaryString(n);
-            String fullBinary = "0".repeat(Math.max(0, size - binary.length())) + binary.toString();
-            System.out.println(fullBinary);
-            return fullBinary;
+            return "0".repeat(Math.max(0, size - binary.length())) + binary.toString();
         }
 
         String binary = Integer.toBinaryString(-n);

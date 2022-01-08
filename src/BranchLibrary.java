@@ -26,7 +26,7 @@ public class BranchLibrary {
 
     void assignCode(ConditionalBranch branch){
         ArrayList<BranchPattern> possiblePatterns = conditionalPatterns.stream()
-                .filter(branchPattern -> branchPattern.getCode().equals(branch.getSymbol()))
+                .filter(branchPattern -> branchPattern.getSymbol().equals(branch.getSymbol()))
                 .collect(Collectors.toCollection(ArrayList::new));
 
         if (possiblePatterns.isEmpty())
