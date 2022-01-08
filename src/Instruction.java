@@ -137,7 +137,7 @@ public class Instruction {
     @Override
     public String toString() {
         // If it's a Branch or a Label
-        if (providedString.startsWith("b") || providedString.startsWith(".")){
+        if ((providedString.startsWith("b") || providedString.startsWith(".")) && !providedString.startsWith("bic")){
             return updatingBranchManager();
         }
 
