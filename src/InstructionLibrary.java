@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 public class InstructionLibrary {
     private final ArrayList<InstructionPattern> patterns = new ArrayList<>();
 
-
     InstructionLibrary(){
         // Register
         final InstructionPattern addRegister = new InstructionPattern("add",  Arrays.asList("rd", "rn", "rm"),  "0001100"); patterns.add(addRegister);
@@ -38,6 +37,7 @@ public class InstructionLibrary {
         final InstructionPattern movImmediate = new InstructionPattern("mov",  Arrays.asList("rd", "#imm8"), "00100", true); patterns.add(movImmediate);
         final InstructionPattern cmpImmediate = new InstructionPattern("cmp",  Arrays.asList("rd", "#imm8"), "00101"); patterns.add(cmpImmediate);
         final InstructionPattern rsbImmediate = new InstructionPattern("rsb",  Arrays.asList("rn", "rd"), "0100001001"); patterns.add(rsbImmediate);
+        final InstructionPattern rsbImmediate2 = new InstructionPattern("rsb",  Arrays.asList("rd", "rn", "#0"), "0100001001", 3); patterns.add(rsbImmediate2);
 
         // SP plus immediate
         final InstructionPattern addSpImmediate = new InstructionPattern("add", Arrays.asList("sp", "#imm7"), "101100000"); patterns.add(addSpImmediate);
@@ -54,6 +54,7 @@ public class InstructionLibrary {
                 .filter(instructionPattern -> instructionPattern.getNbRegisters() == instruction.getNbRegisters())
                 .filter(instructionPattern -> instructionPattern.hasImm() == instruction.hasImm())
                 .filter(instructionPattern -> instructionPattern.hasSp() == instruction.hasSp())
+                .filter(instructionPattern -> instructionPattern.nbVariables() == instruction.nbVariables())
                 .collect(Collectors.toCollection(ArrayList::new));
 
         if (possiblePatterns.isEmpty())
@@ -62,7 +63,7 @@ public class InstructionLibrary {
             instruction.setOpcode(possiblePatterns.get(0).getOpcode());
             instruction.setImmSize(possiblePatterns.get(0).getImmSize());
             instruction.setVariablesAreInRightOrder(possiblePatterns.get(0).getVariablesAreInRightOrder());
+            instruction.setIgnoringParameterN(possiblePatterns.get(0).getIgnoringParameterN());
         }
-
     }
 }

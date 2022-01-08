@@ -6,6 +6,7 @@ public class InstructionPattern {
     private final String instructionName; // Eg. in ADDS <Rd>, <Rn>, <Rm> : "ADDS" is an instruction.
     private final ArrayList<String> variables = new ArrayList<>(); // Eg. in ADDS <Rd>, <Rn>, <Rm> : "Rd, Rn, Rm" are variables.
     private final boolean variablesAreInRightOrder;
+    private final int ignoringParameterN;
 
     private final String opcode; // Eg. in ADDS <Rd>, <Rn>, <Rm> : "0001100" is the opcode.
 
@@ -14,6 +15,7 @@ public class InstructionPattern {
         this.variables.addAll(variables);
         this.opcode = opcode;
         this.variablesAreInRightOrder = false;
+        this.ignoringParameterN = -1;
     }
 
     InstructionPattern(String instructionName,  List<String> variables, String opcode, boolean variablesAreInRightOrder){
@@ -21,6 +23,15 @@ public class InstructionPattern {
         this.variables.addAll(variables);
         this.opcode = opcode;
         this.variablesAreInRightOrder = variablesAreInRightOrder;
+        this.ignoringParameterN = -1;
+    }
+
+    InstructionPattern(String instructionName,  List<String> variables, String opcode, int ignoringParameterN){
+        this.instructionName = instructionName;
+        this.variables.addAll(variables);
+        this.opcode = opcode;
+        this.variablesAreInRightOrder = false;
+        this.ignoringParameterN = ignoringParameterN;
     }
 
     boolean hasSp(){
@@ -59,7 +70,15 @@ public class InstructionPattern {
 
     int getImmSize(){
         for (String variable : variables)
-            if (variable.startsWith("#")) return Integer.parseInt(variable.replace("#imm", ""));
+            if (variable.startsWith("#imm")) return Integer.parseInt(variable.replace("#imm", ""));
         return 0;
+    }
+
+    int getIgnoringParameterN(){
+        return ignoringParameterN;
+    }
+
+    int nbVariables() {
+        return variables.size();
     }
 }

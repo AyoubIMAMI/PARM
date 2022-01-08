@@ -3,20 +3,32 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Instruction {
-    private String providedString;
+    private final String providedString; // The original assembler line.
+    private final int instructionNumber; // The line number where the instruction is.
+    private final BranchManager branchManager;
+
     private final String instructionName; // Eg. in ADDS <Rd>, <Rn>, <Rm> : "ADDS" is an instruction.
     private ArrayList<String> variables = new ArrayList<>(); // Eg. in ADDS <Rd>, <Rn>, <Rm> : "Rd, Rn, Rm" are variables.
 
     private String opcode = "notFound"; // Eg. in ADDS <Rd>, <Rn>, <Rm> : "0001100" is the opcode.
     private int immSize = 0;
-
     private boolean variablesAreInRightOrder;
+    private int ignoringParameterN = -1;
 
-    Instruction(String instructionString){
+    Instruction(String instructionString, int instructionNumber, BranchManager branchManager){
         this.providedString = instructionString;
+        this.instructionNumber = instructionNumber;
+        this.branchManager = branchManager ;
+
         String[] instructionElements = instructionString.split(" ");
         instructionName = instructionElements[0];
+
         variables.addAll(Arrays.asList(instructionElements).subList(1, instructionElements.length));
+        variables.removeIf(variable -> variable.equals(""));
+    }
+
+    void setIgnoringParameterN(int index){
+        this.ignoringParameterN = index;
     }
 
     void setVariablesAreInRightOrder(boolean variablesAreInRightOrder){
@@ -56,6 +68,10 @@ public class Instruction {
             if (variable.equals("sp")) return true;
 
         return false;
+    }
+
+    int nbVariables(){
+        return variables.size();
     }
 
     private String getRegisterBinary(String register) {
@@ -120,32 +136,57 @@ public class Instruction {
 
     @Override
     public String toString() {
+        // If it's a Branch or a Label
         if (providedString.startsWith("b") || providedString.startsWith(".")){
-            return providedString;
+            return updatingBranchManager();
         }
-        convertExistingRegisterToBinary();
-        convertExistingOffsetToBinary();
-        convertExistingImmToBinary();
 
+        // If it's not a Branch or a Label
+        // Converting all parameters to their binary value
+        applyAllBinaryConversions();
+
+        // Finding and applying the binary opcode at the beginning of the string
         StringBuilder processingOutput = new StringBuilder(opcode);
+
+        // Adding binary parameter in the correct order
         if (!variablesAreInRightOrder){
             for(int i = variables.size() - 1; i >= 0; i--){
-                processingOutput.append(" ").append(variables.get(i));
+                if (i != ignoringParameterN - 1)
+                    processingOutput.append(" ").append(variables.get(i));
             }
         } else {
-            for (String variable : variables) {
-                processingOutput.append(" ").append(variable);
+            for(int i = 0; i < variables.size(); i++){
+                if (i != ignoringParameterN - 1)
+                    processingOutput.append(" ").append(variables.get(i));
             }
         }
 
+        // Removing space from the binary value
         String output = String.valueOf(processingOutput).replace(" ", "");
+
+        // Making sure the string is 16 digits long
         output += "0".repeat(Math.max(0, 16 - output.length()));
+
+        // If the instruction is correctly formatted, returning the hex value
         if(output.replace(" ", "").matches("[0-1]+")){
             int decimal = Integer.parseInt(output.replace(" ", ""),2);
             return Integer.toString(decimal,16);
         }
 
-
         return output;
+    }
+
+    private void applyAllBinaryConversions(){
+        convertExistingRegisterToBinary();
+        convertExistingOffsetToBinary();
+        convertExistingImmToBinary();
+    }
+
+    private String updatingBranchManager() {
+        if (providedString.startsWith(".")){
+            branchManager.newLabel(providedString.replaceAll("[.:]", ""), instructionNumber);
+            return null;
+        }
+        return providedString;
     }
 }
