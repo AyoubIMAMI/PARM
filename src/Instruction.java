@@ -170,9 +170,10 @@ public class Instruction {
         // If the instruction is correctly formatted, returning the hex value
         if(output.replace(" ", "").matches("[0-1]+")){
             int decimal = Integer.parseInt(output.replace(" ", ""),2);
-            return Integer.toString(decimal,16);
+            output = Integer.toString(decimal,16);
+            output = "0".repeat(Math.max(0, 4 - output.length())) + output;
+            return output;
         }
-
         return output;
     }
 

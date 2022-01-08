@@ -36,7 +36,9 @@ public class BranchManager {
 
             if(newInstruction.toString().matches("[0-1]+")){
                 int decimal = Integer.parseInt(newInstruction.toString(),2);
-                newInstruction = new StringBuilder(Integer.toString(decimal, 16));
+                String hexValue = Integer.toString(decimal, 16);
+                hexValue = "0".repeat(Math.max(0, 4 - output.length())) + hexValue;
+                newInstruction = new StringBuilder(hexValue);
             }
 
             output.append(newInstruction).append(" ");
