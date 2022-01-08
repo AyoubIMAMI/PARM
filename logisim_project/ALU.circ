@@ -848,6 +848,7 @@
     <comp lib="1" loc="(610,1360)" name="AND Gate">
       <a name="width" val="32"/>
     </comp>
+    <comp lib="1" loc="(630,740)" name="NOT Gate"/>
     <comp lib="1" loc="(660,1060)" name="NOT Gate"/>
     <comp lib="1" loc="(660,1150)" name="NOT Gate"/>
     <comp lib="2" loc="(1060,400)" name="Multiplexer">
@@ -1424,7 +1425,7 @@
     <wire from="(580,610)" to="(640,610)"/>
     <wire from="(580,640)" to="(580,680)"/>
     <wire from="(580,720)" to="(580,740)"/>
-    <wire from="(580,740)" to="(640,740)"/>
+    <wire from="(580,740)" to="(600,740)"/>
     <wire from="(580,950)" to="(940,950)"/>
     <wire from="(590,220)" to="(890,220)"/>
     <wire from="(590,870)" to="(620,870)"/>
@@ -1442,6 +1443,7 @@
     <wire from="(610,1360)" to="(990,1360)"/>
     <wire from="(610,400)" to="(610,410)"/>
     <wire from="(610,410)" to="(880,410)"/>
+    <wire from="(630,740)" to="(640,740)"/>
     <wire from="(660,1020)" to="(660,1030)"/>
     <wire from="(660,1060)" to="(700,1060)"/>
     <wire from="(660,1110)" to="(660,1120)"/>
