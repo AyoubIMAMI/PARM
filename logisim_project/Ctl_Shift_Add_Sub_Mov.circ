@@ -380,22 +380,30 @@ end TCL_Generic;
     <comp lib="0" loc="(1530,200)" name="Tunnel">
       <a name="label" val="Mov_Cmp_Imm8_Codop_Bool"/>
     </comp>
+    <comp lib="0" loc="(1680,250)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="Enable"/>
+    </comp>
     <comp lib="0" loc="(170,100)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="Enable"/>
     </comp>
-    <comp lib="0" loc="(1760,310)" name="Tunnel">
-      <a name="label" val="Opcode"/>
-      <a name="width" val="4"/>
-    </comp>
-    <comp lib="0" loc="(1760,380)" name="Tunnel">
-      <a name="label" val="Flag_Out"/>
-      <a name="width" val="4"/>
+    <comp lib="0" loc="(1740,250)" name="Bit Extender">
+      <a name="in_width" val="1"/>
+      <a name="out_width" val="4"/>
     </comp>
     <comp lib="0" loc="(1790,1130)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="Instruction"/>
       <a name="width" val="16"/>
+    </comp>
+    <comp lib="0" loc="(1810,310)" name="Tunnel">
+      <a name="label" val="Opcode"/>
+      <a name="width" val="4"/>
+    </comp>
+    <comp lib="0" loc="(1810,380)" name="Tunnel">
+      <a name="label" val="Flag_Out"/>
+      <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(1840,1000)" name="Tunnel">
       <a name="facing" val="east"/>
@@ -1175,6 +1183,14 @@ end TCL_Generic;
       <a name="size" val="30"/>
       <a name="width" val="3"/>
     </comp>
+    <comp lib="1" loc="(1800,310)" name="AND Gate">
+      <a name="size" val="30"/>
+      <a name="width" val="4"/>
+    </comp>
+    <comp lib="1" loc="(1800,380)" name="AND Gate">
+      <a name="size" val="30"/>
+      <a name="width" val="4"/>
+    </comp>
     <comp lib="1" loc="(1900,1020)" name="OR Gate">
       <a name="size" val="30"/>
       <a name="width" val="3"/>
@@ -1481,10 +1497,21 @@ end TCL_Generic;
     <wire from="(1500,1240)" to="(1530,1240)"/>
     <wire from="(1510,130)" to="(1530,130)"/>
     <wire from="(1510,200)" to="(1530,200)"/>
+    <wire from="(1680,250)" to="(1700,250)"/>
     <wire from="(170,100)" to="(180,100)"/>
-    <wire from="(1720,310)" to="(1760,310)"/>
-    <wire from="(1720,380)" to="(1760,380)"/>
+    <wire from="(1720,310)" to="(1750,310)"/>
+    <wire from="(1720,380)" to="(1720,390)"/>
+    <wire from="(1720,390)" to="(1770,390)"/>
+    <wire from="(1740,250)" to="(1760,250)"/>
+    <wire from="(1750,310)" to="(1750,320)"/>
+    <wire from="(1750,320)" to="(1770,320)"/>
+    <wire from="(1760,250)" to="(1760,300)"/>
+    <wire from="(1760,300)" to="(1760,370)"/>
+    <wire from="(1760,300)" to="(1770,300)"/>
+    <wire from="(1760,370)" to="(1770,370)"/>
     <wire from="(1790,1130)" to="(1820,1130)"/>
+    <wire from="(1800,310)" to="(1810,310)"/>
+    <wire from="(1800,380)" to="(1810,380)"/>
     <wire from="(1840,1000)" to="(1850,1000)"/>
     <wire from="(1840,1040)" to="(1850,1040)"/>
     <wire from="(1840,1140)" to="(1840,1160)"/>
