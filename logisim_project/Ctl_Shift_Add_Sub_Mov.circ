@@ -247,6 +247,35 @@ end TCL_Generic;
       <text dominant-baseline="central" font-family="SansSerif" font-size="12" text-anchor="middle" x="197" y="202">Flags_Update_Mask</text>
       <text dominant-baseline="central" font-family="SansSerif" font-size="12" text-anchor="middle" x="236" y="44">Carry</text>
     </appear>
+    <comp lib="0" loc="(1110,490)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="Instruction"/>
+      <a name="width" val="16"/>
+    </comp>
+    <comp lib="0" loc="(1110,570)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="Instruction"/>
+      <a name="width" val="16"/>
+    </comp>
+    <comp lib="0" loc="(1160,520)" name="Constant">
+      <a name="facing" val="north"/>
+    </comp>
+    <comp lib="0" loc="(1160,600)" name="Constant">
+      <a name="facing" val="north"/>
+      <a name="value" val="0xd"/>
+      <a name="width" val="4"/>
+    </comp>
+    <comp lib="0" loc="(1200,570)" name="Tunnel">
+      <a name="label" val="Codop"/>
+    </comp>
+    <comp lib="0" loc="(1240,490)" name="Bit Extender">
+      <a name="in_width" val="9"/>
+      <a name="out_width" val="5"/>
+    </comp>
+    <comp lib="0" loc="(1270,490)" name="Tunnel">
+      <a name="label" val="ALU_Opcode"/>
+      <a name="width" val="5"/>
+    </comp>
     <comp lib="0" loc="(1290,1120)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="Only_Add_Codop"/>
@@ -320,20 +349,15 @@ end TCL_Generic;
     <comp lib="0" loc="(1450,120)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="Codop"/>
-      <a name="width" val="3"/>
     </comp>
     <comp lib="0" loc="(1450,150)" name="Constant">
       <a name="value" val="0x0"/>
-      <a name="width" val="3"/>
     </comp>
     <comp lib="0" loc="(1450,190)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="Codop"/>
-      <a name="width" val="3"/>
     </comp>
-    <comp lib="0" loc="(1450,220)" name="Constant">
-      <a name="width" val="3"/>
-    </comp>
+    <comp lib="0" loc="(1450,220)" name="Constant"/>
     <comp lib="0" loc="(1450,310)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="ALU_Opcode"/>
@@ -1049,6 +1073,13 @@ end TCL_Generic;
       <a name="size" val="30"/>
       <a name="width" val="3"/>
     </comp>
+    <comp lib="2" loc="(1170,490)" name="BitSelector">
+      <a name="group" val="9"/>
+      <a name="width" val="16"/>
+    </comp>
+    <comp lib="2" loc="(1170,570)" name="BitSelector">
+      <a name="width" val="16"/>
+    </comp>
     <comp lib="2" loc="(1360,1310)" name="BitSelector">
       <a name="group" val="3"/>
       <a name="width" val="16"/>
@@ -1117,10 +1148,10 @@ end TCL_Generic;
       <a name="width" val="16"/>
     </comp>
     <comp lib="3" loc="(1510,130)" name="Comparator">
-      <a name="width" val="3"/>
+      <a name="width" val="1"/>
     </comp>
     <comp lib="3" loc="(1510,200)" name="Comparator">
-      <a name="width" val="3"/>
+      <a name="width" val="1"/>
     </comp>
     <comp lib="3" loc="(2030,490)" name="Comparator">
       <a name="width" val="1"/>
@@ -1185,6 +1216,13 @@ end TCL_Generic;
     </comp>
     <comp loc="(1720,310)" name="ALU_Opcode_Calculator"/>
     <comp loc="(1720,380)" name="Flag_Calculator"/>
+    <wire from="(1110,490)" to="(1140,490)"/>
+    <wire from="(1110,570)" to="(1140,570)"/>
+    <wire from="(1160,500)" to="(1160,520)"/>
+    <wire from="(1160,580)" to="(1160,600)"/>
+    <wire from="(1170,490)" to="(1200,490)"/>
+    <wire from="(1170,570)" to="(1200,570)"/>
+    <wire from="(1240,490)" to="(1270,490)"/>
     <wire from="(1290,1120)" to="(1310,1120)"/>
     <wire from="(1290,1150)" to="(1360,1150)"/>
     <wire from="(1300,1230)" to="(1370,1230)"/>
