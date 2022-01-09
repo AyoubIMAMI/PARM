@@ -3,6 +3,7 @@ Enable[1] Instruction[16] Z[1] C[1] N[1] V[1] Offset[11] Verified[1]
 
 #    inputs		   outputs 
 # Enable Instruction   Z C N V    Offset Verified
+#Conditional Branch
 #cond=0000
    1  1101000000000011 1 0 0 0 00000000011 1
    1  1101000000000011 0 0 0 0 00000000011 0
@@ -60,3 +61,9 @@ Enable[1] Instruction[16] Z[1] C[1] N[1] V[1] Offset[11] Verified[1]
    1  1101111000000011 1 0 1 1 00000000011 1
 #cond=1111
    1  1101111100000011 0 0 1 0 00000000011 0
+#withEnable
+   1  1101000000000011 1 0 0 0 00000000011 0
+   1  1101110000000011 0 0 1 1 00000000011 1
+#Unconditional Branch
+   1  1110000000000011 0 0 1 0 00000000011 0
+   1  1110000000110011 0 0 1 0 00000000011 0
