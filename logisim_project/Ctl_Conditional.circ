@@ -455,13 +455,21 @@ end TCL_Generic;
       <a name="facing" val="east"/>
       <a name="label" val="Verified"/>
     </comp>
-    <comp lib="0" loc="(750,560)" name="Tunnel">
-      <a name="label" val="Offset"/>
-      <a name="width" val="11"/>
+    <comp lib="0" loc="(820,580)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="Enable"/>
     </comp>
     <comp lib="0" loc="(850,800)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="IsCondi"/>
+    </comp>
+    <comp lib="0" loc="(860,580)" name="Bit Extender">
+      <a name="in_width" val="1"/>
+      <a name="out_width" val="11"/>
+    </comp>
+    <comp lib="0" loc="(910,570)" name="Tunnel">
+      <a name="label" val="Offset"/>
+      <a name="width" val="11"/>
     </comp>
     <comp lib="0" loc="(910,840)" name="Tunnel">
       <a name="facing" val="east"/>
@@ -487,6 +495,10 @@ end TCL_Generic;
     </comp>
     <comp lib="1" loc="(880,790)" name="AND Gate">
       <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(890,570)" name="AND Gate">
+      <a name="size" val="30"/>
+      <a name="width" val="11"/>
     </comp>
     <comp lib="1" loc="(940,830)" name="AND Gate">
       <a name="size" val="30"/>
@@ -521,8 +533,10 @@ end TCL_Generic;
     <wire from="(700,550)" to="(720,550)"/>
     <wire from="(700,570)" to="(700,620)"/>
     <wire from="(700,570)" to="(720,570)"/>
+    <wire from="(750,560)" to="(860,560)"/>
     <wire from="(780,780)" to="(850,780)"/>
     <wire from="(880,790)" to="(900,790)"/>
+    <wire from="(890,570)" to="(910,570)"/>
     <wire from="(900,790)" to="(900,820)"/>
     <wire from="(900,820)" to="(910,820)"/>
     <wire from="(940,830)" to="(970,830)"/>

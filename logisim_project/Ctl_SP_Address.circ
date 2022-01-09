@@ -361,6 +361,9 @@ end TCL_Generic;
       <a name="label" val="New_Stack_pointer"/>
       <a name="width" val="32"/>
     </comp>
+    <comp lib="1" loc="(370,470)" name="NOT Gate">
+      <a name="size" val="20"/>
+    </comp>
     <comp lib="1" loc="(540,740)" name="NOT Gate">
       <a name="size" val="20"/>
       <a name="width" val="32"/>
@@ -381,7 +384,7 @@ end TCL_Generic;
       <a name="size" val="30"/>
       <a name="width" val="32"/>
     </comp>
-    <comp lib="1" loc="(860,840)" name="OR Gate">
+    <comp lib="1" loc="(860,840)" name="AND Gate">
       <a name="size" val="30"/>
       <a name="width" val="32"/>
     </comp>
@@ -418,10 +421,11 @@ end TCL_Generic;
     <wire from="(270,470)" to="(310,470)"/>
     <wire from="(310,370)" to="(330,370)"/>
     <wire from="(330,480)" to="(330,520)"/>
-    <wire from="(340,470)" to="(390,470)"/>
+    <wire from="(340,470)" to="(350,470)"/>
     <wire from="(340,660)" to="(470,660)"/>
     <wire from="(340,820)" to="(470,820)"/>
     <wire from="(370,370)" to="(390,370)"/>
+    <wire from="(370,470)" to="(390,470)"/>
     <wire from="(430,470)" to="(500,470)"/>
     <wire from="(430,610)" to="(450,610)"/>
     <wire from="(430,770)" to="(450,770)"/>
