@@ -585,7 +585,7 @@
     </comp>
     <comp lib="0" loc="(510,1410)" name="Tunnel">
       <a name="facing" val="east"/>
-      <a name="label" val="B"/>
+      <a name="label" val="A"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="0" loc="(510,850)" name="Tunnel">
